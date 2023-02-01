@@ -43,7 +43,7 @@ const createUser = async (req, res) => {
 
     // resApi(res, "ok", newUser);
   } catch (error) {
-    messagError(error);
+    msg(error);
   }
 };
 

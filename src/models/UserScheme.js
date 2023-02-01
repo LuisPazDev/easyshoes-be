@@ -9,10 +9,7 @@ const userScheme = mongoose.Schema({
   },
   email: {
     type: String,
-    match: [
-      /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
-      "Please fill a valid email address",
-    ],
+    match: [/\S+@\S+\.\S+/, "invalid email"],
     lowercase: true,
     unique: true,
     require: true,
@@ -23,7 +20,7 @@ const userScheme = mongoose.Schema({
   },
 });
 
-userScheme.plugin(uniqueValidator, { message: "Email is already registered" });
+userScheme.plugin(uniqueValidator, { msg: "Email is already registered" });
 const Users = mongoose.model("user", userScheme);
 
 module.exports = Users;
