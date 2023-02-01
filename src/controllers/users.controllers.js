@@ -42,8 +42,8 @@ const createUser = async (req, res) => {
     );
 
     // resApi(res, "ok", newUser);
-  } catch {
-    messagError("Error creating user");
+  } catch (error) {
+    messagError(error);
   }
 };
 
