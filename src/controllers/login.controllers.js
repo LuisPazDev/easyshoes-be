@@ -26,7 +26,7 @@ const createUser = async (req, res) => {
       jwt.sign(
         payload,
         process.env.SECRET,
-        { expiresIn: 36000 },
+        { expiresIn: 56000 },
         (error, token) => {
           if (error) throw error;
           res.json({ token });
