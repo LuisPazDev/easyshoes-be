@@ -7,7 +7,7 @@ const Users = require("../models/UserScheme");
 const getUser = async (req, res) => {
   try {
     message("User loaded");
-    const user = await Users.find({});
+    const user = await Users.findById(req.user.id);
     resApi(res, "ok", user);
   } catch (error) {
     res.status(500).json({ msg: "Error", error });
