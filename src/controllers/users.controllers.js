@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { message, messagError, resApi } = require("../helpers/helpers");
@@ -40,8 +40,41 @@ const createUser = async (req, res) => {
         res.json({ token });
       }
     );
+  } catch (error) {
+    msg(error);
+  }
+};
 
-    // resApi(res, "ok", newUser);
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    // Check if user exists
+    const user = await Users.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ msg: "Invalid credentials" });
+    }
+
+    // Check if password is correct
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ msg: "Invalid credentials" });
+    }
+
+    // Create JWT token
+    const payload = {
+      user: {
+        id: user._id,
+      },
+    };
+    jwt.sign(
+      payload,
+      process.env.SECRET,
+      { expiresIn: 36000 },
+      (error, token) => {
+        if (error) throw error;
+        res.json({ token });
+      }
+    );
   } catch (error) {
     msg(error);
   }
@@ -71,6 +104,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
   getUser,
+  loginUser,
   createUser,
   updateUser,
   deleteUser,
