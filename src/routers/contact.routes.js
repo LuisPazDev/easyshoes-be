@@ -6,8 +6,8 @@ const {
 
 const routers = Router();
 
-routers.get("/contact", getContact);
+routers.get("/get", getContact);
 
-routers.post("/contact", addContact);
+routers.post("/addcontact", addContact);
 
 module.exports = routers;
