@@ -1,6 +1,16 @@
 const { message, messagError, resApi } = require("../helpers/helpers");
 const Contact = require("../models/ContactScheme");
 
+const getContact = async (req, res) => {
+  try {
+    message("Contacts loaded");
+    const contact = await Contact.find({});
+    resApi(res, "ok", contact);
+  } catch (error) {
+    res.status(500).json({ msg: "Error", error });
+  }
+};
+
 const addContact = async (req, res) => {
   const { name, email, comment } = req.body;
   try {
@@ -17,5 +27,6 @@ const addContact = async (req, res) => {
 };
 
 module.exports = {
+  getContact,
   addContact,
 };

@@ -1,11 +1,12 @@
 const { Router } = require("express");
-const { addContact } = require("../controllers/contact.controllers");
+const {
+  addContact,
+  getContact,
+} = require("../controllers/contact.controllers");
 
 const routers = Router();
 
-routers.get("/", (req, res) => {
-  res.send("Contact Page");
-});
+routers.get("/contact", getContact);
 
 routers.post("/contact", addContact);
 
