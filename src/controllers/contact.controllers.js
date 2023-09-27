@@ -2,13 +2,13 @@ const { message, messagError, resApi } = require("../helpers/helpers");
 const Contact = require("../models/ContactScheme");
 
 const addContact = async (req, res) => {
-  const { name, email, info } = req.body;
+  const { name, email, comment } = req.body;
   try {
     message("Message Sent");
     const newContact = await Contact.create({
       name,
       email,
-      info,
+      comment,
     });
     res.json(newContact);
   } catch {

@@ -24,5 +24,5 @@ app.use("/shoes", require("./routers/shoes.routes"));
 app.use("/contact", require("./routers/contact.routes"));
 
 app.get("/", (req, res) => {
-  res.send("Easy Shoes API");
+  res.send("Welcome to Easy Shoes API");
 });

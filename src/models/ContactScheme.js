@@ -10,7 +10,7 @@ const contactScheme = mongoose.Schema(
       type: String,
       require: true,
     },
-    info: {
+    comment: {
       type: String,
       require: true,
     },
