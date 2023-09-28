@@ -51,13 +51,13 @@ const loginUser = async (req, res) => {
     // Check if user exists
     const user = await Users.findOne({ email });
     if (!user) {
-      return res.status(400).json({ msg: "Invalid credentials" });
+      return res.status(400).json({ msg: "User does not exists" });
     }
 
     // Check if password is correct
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: "Invalid credentials" });
+      return res.status(400).json({ msg: "Incorrect Password" });
     }
 
     // Create JWT token
@@ -66,15 +66,19 @@ const loginUser = async (req, res) => {
         id: user._id,
       },
     };
-    jwt.sign(
-      payload,
-      process.env.SECRET,
-      { expiresIn: 36000 },
-      (error, token) => {
-        if (error) throw error;
-        res.json({ token });
-      }
-    );
+    if (email && password) {
+      jwt.sign(
+        payload,
+        process.env.SECRET,
+        { expiresIn: 36000 },
+        (error, token) => {
+          if (error) throw error;
+          res.json({ token });
+        }
+      );
+    } else {
+      res.status(400).json({ msg: "Email and Password are required" });
+    }
   } catch (error) {
     msg(error);
   }
