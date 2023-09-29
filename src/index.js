@@ -23,6 +23,8 @@ app.use("/shoes", require("./routers/shoes.routes"));
 
 app.use("/contact", require("./routers/contact.routes"));
 
+app.use("/orders", require("./routers/orders.routes"));
+
 app.get("/", (req, res) => {
   res.send("Welcome to Easy Shoes API");
 });
