@@ -4,7 +4,7 @@ const Orders = require("../models/OrdersScheme");
 const getOrders = async (req, res) => {
   try {
     message("Order loaded");
-    const order = await Order.find({});
+    const order = await Orders.find({});
     resApi(res, "ok", order);
   } catch (error) {
     res.status(500).json({ msg: "Error", error });
