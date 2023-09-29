@@ -18,6 +18,26 @@ const orderScheme = mongoose.Schema(
       type: String,
       require: true,
     },
+    shoes: [
+      {
+        brand: {
+          type: String,
+          required: true,
+        },
+        model: {
+          type: String,
+          required: true,
+        },
+        price: {
+          type: String,
+          required: true,
+        },
+        size: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

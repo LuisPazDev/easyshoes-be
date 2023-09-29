@@ -12,7 +12,7 @@ const getOrders = async (req, res) => {
 };
 
 const addOrder = async (req, res) => {
-  const { name, email, address, payment } = req.body;
+  const { name, email, address, payment, shoes } = req.body;
   try {
     message("Order Sent");
     const newOrder = await Orders.create({
@@ -20,6 +20,7 @@ const addOrder = async (req, res) => {
       email,
       address,
       payment,
+      shoes,
     });
     res.json(newOrder);
   } catch {
