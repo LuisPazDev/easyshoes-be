@@ -20,6 +20,7 @@ const addOrder = async (req, res) => {
       email,
       address,
       payment,
+      promocode,
       shoes,
     });
     res.json(newOrder);
